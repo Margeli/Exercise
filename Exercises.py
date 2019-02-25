@@ -72,6 +72,8 @@ def Ex13():
     ex13.reshape(5,5)
     print(ex13,"\n")
 
+
+
 if __name__ == "__main__":
     Ex1()
     Ex2()
