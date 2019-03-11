@@ -11,6 +11,6 @@ def Ex1():
     cv2.imshow("Image", img)
     cv2.waitKey(0)
 
-
-if __name__ == "__main__":
-    Ex1()
+#
+# if __name__ == "__main__":
+#     Ex1()
