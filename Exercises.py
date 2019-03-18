@@ -44,20 +44,29 @@ def Ex9():
     print(ex9Mat,"and the mean value is:",ex9Mat.mean(), "\n")
 
 def Ex10():
-    ex10 = n.zeros(100).reshape(10,10)
-    ex10[:,0] = 1
-    ex10[0,:] = 1
-    ex10[9,:] = 1
-    ex10[:,9] = 1
+    # ex10 = n.zeros(100).reshape(10,10)
+    # ex10[:,0] = 1
+    # ex10[0,:] = 1
+    # ex10[9,:] = 1
+    # ex10[:,9] = 1
+# improved
+
+    ex10 = n.ones((10,10))
+    ex10[1:9,1:9] = 0
+
     print(ex10,"\n")
 
 def Ex11():
-    ex11 = n.zeros(25).reshape(5,5)
-    ex11[0, :] = 1
-    ex11[1, :] = 2
-    ex11[2, :] = 3
-    ex11[3, :] = 4
-    ex11[4, :] = 5
+    # ex11 = n.zeros(25).reshape(5,5)
+    # ex11[0, :] = 1
+    # ex11[1, :] = 2
+    # ex11[2, :] = 3
+    # ex11[3, :] = 4
+    # ex11[4, :] = 5
+
+    ex11 = n.zeros((5,5))
+    ex11 += n.arange(1,6)
+
     print(ex11,"\n")
 
 def Ex12():
@@ -65,14 +74,36 @@ def Ex12():
     print(ex12,"\n")
 
 def Ex13():
-    ex13 = n.random.randint(0,10,25)
+    # ex13 = n.random.randint(0,10,25)
+    # mean = ex13.mean()
+    # for i in range(0,25):
+    #     ex13[i] = ex13[i]-mean
+    # ex13.reshape(5,5)
+    #
+    ex13 = n.random.random((5,5))
     mean = ex13.mean()
-    for i in range(0,25):
-        ex13[i] = ex13[i]-mean
-    ex13.reshape(5,5)
+    ex13-mean
     print(ex13,"\n")
 
+def Ex14():
+    # ex14 = n.random.random((5,5))
+    # avrg = ex14.mean(1)
+    # ex14 = ex14 - avrg
 
+    ex14 = n.random.random((5, 5))
+    col = ex14.mean(axis=1, keepdims=True)
+    ex14 = ex14 - col
+
+    print(ex14,  "\n")
+
+def Ex15():
+    mat = n.random.random((5,5))
+    ex15 = n.abs(mat-0.5).argmin()
+    print("val: {}".format(mat.flat[ex15]))
+
+def Ex16():
+    ex16 = n.random.random((3,3))
+    print(n.count_nonzero(ex16 > 5.0))
 
 if __name__ == "__main__":
     Ex1()
@@ -88,3 +119,6 @@ if __name__ == "__main__":
     Ex11()
     Ex12()
     Ex13()
+    Ex14()
+    Ex15()
+    Ex16()
