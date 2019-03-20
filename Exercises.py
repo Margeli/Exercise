@@ -1,5 +1,5 @@
 import numpy as n
-
+import cv2
 
 
 def Ex1():
@@ -39,9 +39,11 @@ def Ex8():
     ex8Mat = n.random.random((3,3))
     print(ex8Mat,"\n")
 
+
 def Ex9():
     ex9Mat = n.random.randint(0, 100, 10)
     print(ex9Mat,"and the mean value is:",ex9Mat.mean(), "\n")
+
 
 def Ex10():
     # ex10 = n.zeros(100).reshape(10,10)
@@ -56,6 +58,7 @@ def Ex10():
 
     print(ex10,"\n")
 
+
 def Ex11():
     # ex11 = n.zeros(25).reshape(5,5)
     # ex11[0, :] = 1
@@ -69,9 +72,11 @@ def Ex11():
 
     print(ex11,"\n")
 
+
 def Ex12():
     ex12 = n.float64(n.random.randint(0,10,9).reshape(3,3))
     print(ex12,"\n")
+
 
 def Ex13():
     # ex13 = n.random.randint(0,10,25)
@@ -85,6 +90,7 @@ def Ex13():
     ex13-mean
     print(ex13,"\n")
 
+
 def Ex14():
     # ex14 = n.random.random((5,5))
     # avrg = ex14.mean(1)
@@ -96,29 +102,104 @@ def Ex14():
 
     print(ex14,  "\n")
 
+
 def Ex15():
     mat = n.random.random((5,5))
     ex15 = n.abs(mat-0.5).argmin()
     print("val: {}".format(mat.flat[ex15]))
 
+
 def Ex16():
     ex16 = n.random.random((3,3))
     print(n.count_nonzero(ex16 > 5.0))
 
-if __name__ == "__main__":
-    Ex1()
-    Ex2()
-    Ex3()
-    Ex4()
-    Ex5()
-    Ex6()
-    Ex7()
-    Ex8()
-    Ex9()
-    Ex10()
-    Ex11()
-    Ex12()
-    Ex13()
-    Ex14()
-    Ex15()
-    Ex16()
+
+def ex17():
+    print("ex17 - create horizontal gradient image of 64x64 that goes from black to white")
+    img = n.zeros((64, 64))
+    row = n.arange(64) / 64.0
+    img += row
+    cv2.imshow("Image", n.uint8(img * 255))
+    cv2.waitKey(0)
+
+
+def ex18():
+    print("ex18 - create horizontal gradient image of 64x64 that goes from black to white")
+    img = n.zeros((64, 64))
+    col = n.arange(64) / 64.0
+    col = n.reshape(64,1)
+    img += col
+    cv2.imshow("Image", n.uint8(img * 255))
+    cv2.waitKey(0)
+
+
+def ex19():
+    print("ex19 - create a 3-component white image of 64x64 pixels"
+          "and set the blue component to zero (the result should be yellow)")
+    img = n.ones((64, 64, 3))
+    img[:, :, 0] = 0
+    cv2.imshow("Image", n.uint8(img * 255))
+    cv2.waitKey(0)
+
+
+def ex20():
+    print("ex20 - create a 3-component white image of 64x64 pixels, "
+          "set the blue component of the top-left part to zero (the result should be yellow)"
+          "and the red component of the bottom-right part to zero (the result should be cyan")
+    img = n.ones((64, 64, 3))
+    img[:32, :32, 0] = 0
+    img[32:, 32:, 2] = 0
+    cv2.imshow("Image", n.uint8(img * 255))
+    cv2.waitKey(0)
+
+def ex21():
+    print("ex21 - open an image and insert horizontal scanlines at 50%")
+    img = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+    cv2.imshow("Image", img)
+    cv2.waitKey(0)
+    img[::2, :] = 0
+    cv2.imshow("Image", img)
+    cv2.waitKey(0)
+
+def ex22():
+    print("ex21 - open an image and insert horizontal scanlines at 50%")
+    img = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+    cv2.imshow("Image", img)
+    cv2.waitKey(0)
+    img[:, ::2] = 0
+    cv2.imshow("Image", img)
+    cv2.waitKey(0)
+
+def ex23():
+    print("ex21 - open an image and insert horizontal scanlines at 50%")
+    img = cv2.imread("image.jpg", cv2.IMREAD_COLOR)
+    cv2.imshow("Image", img)
+    cv2.waitKey(0)
+    img = n.floa64(img)
+    img[:,:,:,]
+    cv2.imshow("Image", img)
+    cv2.waitKey(0)
+
+# if __name__ == "__main__":
+#     Ex1()
+#     Ex2()
+#     Ex3()
+#     Ex4()
+#     Ex5()
+#     Ex6()
+#     Ex7()
+#     Ex8()
+#     Ex9()
+#     Ex10()
+#     Ex11()
+#     Ex12()
+#     Ex13()
+#     Ex14()
+#     Ex15()
+#     Ex16()
+#     ex17()
+#     ex18()
+#     ex19()
+#     ex20()
+#     ex21()
+#     ex22()
