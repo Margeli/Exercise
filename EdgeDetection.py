@@ -29,11 +29,11 @@ def applyGaussFilter(dest):
 
     # Create the kernel manually
     kernel = np.array([
-        [1, 4, 7, 4, 1],
-        [4, 16, 26, 16, 4],
-        [7, 26, 41, 26, 7],
-        [4, 16, 26, 16, 4],
-        [1, 4, 7, 4, 1]
+        [2, 4, 5, 4, 2],
+        [4, 9, 12, 9, 4],
+        [5, 12, 15, 12, 5],
+        [4, 9, 12, 9, 4],
+        [2, 4, 5, 4, 2]
     ])
     # Creating the kernel with opencv
     # kradi = ksize / 2
@@ -106,9 +106,12 @@ def applySobelFilter(dest):
 
 def run():
     # Load an image
-    img = cv2.imread("image.jpg", cv2.IMREAD_ANYCOLOR)
+    img = cv2.imread("image2.png", cv2.IMREAD_ANYCOLOR)
 
     img2 = applyGaussFilter(img)
+    # cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
+    imgGray = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY);
+
 
     img3 = applySobelFilter(img2)
     # Using cv2
