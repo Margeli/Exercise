@@ -39,6 +39,6 @@ def execute2():
     cv2.imshow("Filtered", np.uint8(filtered))
     cv2.waitKey(0)
 
-
-if __name__ == "__main__":
-    execute2()
+#
+# if __name__ == "__main__":
+#     execute2()

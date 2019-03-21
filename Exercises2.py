@@ -64,12 +64,12 @@ def Ex7():
     cv2.imshow('Image', n.uint8(img*255))
     cv2.waitKey(0)
 
-
-if __name__ == "__main__":
-    Ex1()
-    # Ex2()
-    # Ex3()
-    # ex4()
-    # Ex5()
-    # ex6()
-    Ex7()
+#
+# if __name__ == "__main__":
+#     Ex1()
+#     # Ex2()
+#     # Ex3()
+#     # ex4()
+#     # Ex5()
+#     # ex6()
+#     Ex7()
