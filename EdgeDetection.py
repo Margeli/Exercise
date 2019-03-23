@@ -138,17 +138,61 @@ def applySobelFilter(dest):
 
     return src, angles
 
+def applyMFilter(mag, ang):
+    rows, cols = mag.shape
+    img =  np.zeros(mag.shape)
+    for x in range(1,rows-1):
+        for y in range(1,cols-1):
+            if ang[x][y]== 0:
+                if mag[x][y] >= mag[x+1][y] and mag[x][y] >= mag[x-1][y]:
+                    img[x][y] = mag[x][y]
+            if ang[x][y]== 45:
+                if mag[x][y] >= mag[x][y+1] and mag[x][y] >= mag[x][y-1]:
+                    img[x][y] = mag[x][y]
+            if ang[x][y]== 90:
+                if mag[x][y] >= mag[x-1][y+1] and mag[x][y] >= mag[x+1][y-1]:
+                    img[x][y] = mag[x][y]
+            if ang[x][y] == 135:
+                if mag[x][y] >= mag[x - 1][y-1] and mag[x][y] >= mag[x + 1][y+1]:
+                    img[x][y] = mag[x][y]
+    return img
+
+def applyHysteresisThresholdingFilter(img, min, max):
+    nwimg = np.zeros(img.shape)
+    rows, cols = img.shape
+    for x in range(rows):
+        for y in range(cols):
+            if img[x][y] >= max: #edge
+                nwimg[x][y] = 255
+            if img[x][y] <= min: #not edge
+                nwimg[x][y] = 0
+            if img[x][y]<max and img[x][y]>min:
+                nwimg[x][y] = 0.5 #posible
+    for x in range(rows):
+        for y in range(cols):
+            if nwimg[x][y] == 0.5:
+                for i in range(-1,2):
+                    for j in range(-1, 2):
+                        if nwimg[x+i][y+j] == 255 :
+                            nwimg[x][y] = 255
+
+    return nwimg
+
 def run():
     # Load an image
-    img = cv2.imread("image2.png", cv2.IMREAD_GRAYSCALE)
+    img = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
 
     # Using cv2
     # filtered = cv2.GaussianBlur(img, (5,5), 2.0)
     blurr = applyGaussFilter(img)
-    G_magnitudes,G_angles = applySobelFilter(blurr)
+    g_magnitudes,g_angles = applySobelFilter(blurr)
 
-    
+    m_img = applyMFilter(g_magnitudes, g_angles)
 
+    canny = applyHysteresisThresholdingFilter(m_img, 20, 50)
+
+    cv2.imshow("M", np.uint8(m_img))
+    cv2.imshow("Canny", np.uint8(canny))
     # Show the image
 
     # cv2.imshow("Original", img)
